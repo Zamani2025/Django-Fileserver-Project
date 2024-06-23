@@ -89,3 +89,4 @@ This platform allows businesses to distribute documents such as wedding cards, a
 ![Live Demo](https://saani.pythonanywhere.com/login/)
 
 ### ER DIAGRAM
+![diagram](https://github.com/Zamani2025/Django-Fileserver-Project/blob/main/my_project_visualized.png)
