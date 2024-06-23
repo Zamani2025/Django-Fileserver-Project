@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid my-5">
+        
+         <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="row px-3">
+                    <h6 class="m-0 font-weight-bold text-primary">All Categories</h6>
+                    <h6 class="m-0 font-weight-bold text-primary ml-auto"><a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#categoryModal"><i class="fa fa-plus" aria-hidden="true"></i> Add Category</a></h6>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Created</th>
+                                <th>Updated</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if catgories %}
+                                {% for category in catgories %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ category.name|title }}</td>
+                                        <td>{{ category.created|date:'Y-m-d' }}</td>
+                                        <td>{{ category.updated|date:'Y-m-d' }}</td>
+                                        <td><a href="#" data-toggle="modal" data-target="#categoryModal{{category.id}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a></td>
+                                        <td><a href="#" data-toggle="modal" data-target="#deleteModal{{category.id}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                    
+                                    <!-- Edit Category Modal-->
+                                    <div class="modal fade" id="categoryModal{{category.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Category</h5>
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{% url 'edit-category' category.id %}" method="post">
+                                                        {% csrf_token %}
+
+                                                        <div class="form-group">
+                                                            <label for="" class="form-label">Category Name</label>
+                                                            <input type="text" name="name" class="form-control" value="{{category.name}}" id="">
+                                                        </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                    <button class="btn btn-primary" type="submit">Edit Category</button>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <!-- delete Modal-->
+                                    <div class="modal fade" id="deleteModal{{category.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Ready to delete?</h5>
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">Click on "Delete" button below if you are ready to delete {{category.name}}.</div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                <a class="btn btn-primary" href="{% url 'delete-category' category.id %}">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>   
+                                {% endfor %}
+                            {% else %}
+                                    <tr>
+                                        <td colspan="6" class="m-4">
+                                            <h3 class="text-center text-danger" style="font-weight: bold;">No item found!</h3>
+                                        </td>
+                                    </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Category Modal-->
+    <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'add-category' %}" method="post">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            {% if field.errors %}
+                                <div class="form-group">
+                                    <label for="" class="form-label">{{field.label}}</label>
+                                    {{field}}
+                                    <span class="text-danger">{{field.errors}}</span>
+                                </div>
+                            {% else %}
+                                <div class="form-group">
+                                    <label for="" class="form-label">{{field.label}}</label>
+                                    {{field}}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="submit"><i class="fa fa-plus" aria-hidden="true"></i> Add Category</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
