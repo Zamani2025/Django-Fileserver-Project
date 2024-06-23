@@ -19,7 +19,7 @@ This platform allows businesses to distribute documents such as wedding cards, a
 
    ```bash
    git clone https://github.com/Zamani2025/Django-Fileserver-Project.git
-   cd django_fileserver_project
+   cd Django-Fileserver-Project
    ```
 
 2. Create and activate a virtual environment:
