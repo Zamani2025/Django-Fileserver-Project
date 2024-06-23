@@ -1,4 +1,4 @@
-﻿# django_fileserver_project
+﻿# Django-Fileserver-Project
 This platform allows businesses to distribute documents such as wedding cards, admission forms, etc., to various users. User can sign up, log in, search for files, download them and send files via email. Administrators can upload files and view usage statistics
 ## Key Features
 - User registration and authentication with email verification
