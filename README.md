@@ -60,10 +60,12 @@ This platform allows businesses to distribute documents such as wedding cards, a
 1. Sign Up:
    - Go to the registration page and fill in your details.
    - Check your email for a verification link and click it to verify your account.
-
+```
+```markdown
 2. Log In:
    - Go to the login page and enter your credentials.
-
+```
+```markdown
 ### File Browsing and Downloading
 1. Feed Page:
    - After logging in, you will see a list of available files.
@@ -71,12 +73,13 @@ This platform allows businesses to distribute documents such as wedding cards, a
 
 2. Search Files:
    - Use the search bar on the feed page to search for files by title or description.
-
+```
+```markdown
 ### Email File Sharing
 1. Send File via Email:
    - On the file details page, enter the recipient's email address and click send.
    - The recipient will receive an email with a link to download the file.
-
+```markdown
 ### Admin Features
 1. Upload Files:
    - Log in as an admin.
@@ -84,9 +87,9 @@ This platform allows businesses to distribute documents such as wedding cards, a
 
 2. View Analytics:
    - In the admin dashboard, view the number of downloads and emails sent for each file.
-
-### Deploy Link
+```
+## Deploy Link
 ![Live Demo](https://saani.pythonanywhere.com/login/)
 
-### ER DIAGRAM
-![diagram](https://github.com/Zamani2025/Django-Fileserver-Project/blob/main/my_project_visualized.png)
+## ER DIAGRAM
+![my_project_visualized](https://github.com/Zamani2025/Django-Fileserver-Project/assets/73368821/f80c25fb-9e44-4914-92a2-a85b68b750b7)
