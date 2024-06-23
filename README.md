@@ -62,11 +62,11 @@ This platform allows businesses to distribute documents such as wedding cards, a
    - Check your email for a verification link and click it to verify your account.
 ```
 ![Screenshot (6)](https://github.com/Zamani2025/Django-Fileserver-Project/assets/73368821/45ee78fe-6ef1-439e-92b9-8c5d01e69a17)
-
 ```markdown
 2. Log In:
    - Go to the login page and enter your credentials.
 ```
+![Screenshot (4)](https://github.com/Zamani2025/Django-Fileserver-Project/assets/73368821/c9dbe6f0-1d98-4a0d-a590-5d91ce9d59f1)
 ```markdown
 ### File Browsing and Downloading
 1. Feed Page:
