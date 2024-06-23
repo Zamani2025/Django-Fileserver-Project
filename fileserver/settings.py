@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'adminapp',
+
+    'django_extensions',
 ]
 
 AUTH_USER_MODEL = 'core.CustomUser'
