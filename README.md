@@ -32,7 +32,7 @@ This platform allows businesses to distribute documents such as wedding cards, a
 3. Install the dependencies:
 
    ```bash
-   pip install -r requirements.txt
+   pip install django pillow six
    ```
 4. Apply the migrations:
 
