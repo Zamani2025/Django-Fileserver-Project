@@ -61,6 +61,8 @@ This platform allows businesses to distribute documents such as wedding cards, a
    - Go to the registration page and fill in your details.
    - Check your email for a verification link and click it to verify your account.
 ```
+![Screenshot (6)](https://github.com/Zamani2025/Django-Fileserver-Project/assets/73368821/45ee78fe-6ef1-439e-92b9-8c5d01e69a17)
+
 ```markdown
 2. Log In:
    - Go to the login page and enter your credentials.
