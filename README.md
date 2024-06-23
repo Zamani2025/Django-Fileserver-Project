@@ -93,6 +93,7 @@ This platform allows businesses to distribute documents such as wedding cards, a
 2. View Analytics:
    - In the admin dashboard, view the number of downloads and emails sent for each file.
 ```
+![Screenshot (10)](https://github.com/Zamani2025/Django-Fileserver-Project/assets/73368821/12882ca8-14c3-413f-9407-618544ca926a)
 ## Deploy Link
 [File Server Live Demo](https://saani.pythonanywhere.com/login/)
 
