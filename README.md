@@ -83,6 +83,7 @@ This platform allows businesses to distribute documents such as wedding cards, a
    - On the file details page, enter the recipient's email address and click send.
    - The recipient will receive an email with a link to download the file.
 ```
+![Screenshot (9)](https://github.com/Zamani2025/Django-Fileserver-Project/assets/73368821/a935adbb-6bdb-48c1-b33b-6f401b2196cb)
 ```markdown
 ### Admin Features
 1. Upload Files:
