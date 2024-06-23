@@ -18,7 +18,7 @@ This platform allows businesses to distribute documents such as wedding cards, a
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Zamani2025/django_fileserver_project
+   git clone https://github.com/Zamani2025/Django-Fileserver-Project.git
    cd django_fileserver_project
    ```
 
