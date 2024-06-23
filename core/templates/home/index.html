@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="">
+        <div class="container mt-4">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                  <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Table View</button>
+                  <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Grid View</button>
+                </div>
+              </nav>
+              <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                    <div class="card shadow mb-4 mt-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Title</th>
+                                            <th>Type</th>
+                                            <th>Desc</th>
+                                            <th>Download</th>
+                                            <th>Share</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for file in page_obj %}
+                                            <tr>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ file.title|title }}</td>
+                                                <td>{{ file.file.name|upper|slice:"-3:"}}</td>
+                                                <td>{{ file.description }}</td>
+                                                <td><a href="{% url 'download_file' file.id %}" class="btn btn-sm btn-primary"><i class="fa fa-download"></i></a></td>
+                                                <td><a href="#" data-toggle="modal" data-target="#sendFileModal{{file.id}}" class="btn btn-info btn-sm"><i class="fa fa-share-alt-square"></i></a></td>
+                                            </tr>
+                                
+                                            <!-- Send File Modal-->
+                                            <div class="modal fade" id="sendFileModal{{file.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Ready to Share File?</h5>
+                                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form method="POST" action="{% url 'send_file' file.id %}">
+                                                                {% csrf_token %}
+                                                                <div class="form-group">
+                                                                    <label class="form-label">Email</label>
+                                                                    <input type="email" name="email" class="form-control" placeholder="Enter your email" required />
+                                                                </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                            <button type="submit" class="btn btn-primary"><i class="fa fa-share-alt-square" aria-hidden="true"></i> Share</button>
+                                                        </div>
+                                                        
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% empty %}
+                                            <tr>
+                                                <td colspan="8" class="m-4">
+                                                    <h3 class="text-center text-danger" style="font-weight: bold;">No item found!</h3>
+                                                </td>
+                                            </tr>     
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 py-3 pt-4">
+                        <ul class="pagination justify-content-center">
+                            {% if page_obj %}
+                                {% if page_obj.has_previous %}
+                                    <li class="page-item">
+                                        <a href="{% url 'home' %}?page={{page_obj.previous_page_number}}" class="page-link bg-primary text-white">Prev</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item">
+                                        <span class="page-link disabled">Prev</span>
+                                    </li>
+                                {% endif %}
+                                {% for i in page_obj.paginator.page_range %}
+                                    {% if page_obj.number == 1 %}
+                                        <li class="page-item active">
+                                            <a href="" class="page-link">{{i}}</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item active">
+                                            <a href="{% url 'home' %}?page={{ i }}" class="page-link">{{i}}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                    <li class="page-item">
+                                        <a href="{% url 'home' %}?page={{page_obj.next_page_number}}" class="page-link bg-primary text-white">Next</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item">
+                                        <span class="page-link disabled">Next</span>
+                                    </li>
+                                {% endif %}
+                            {% else %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+                    <div class="row mt-4">
+                            {% for file in page_obj.object_list %}
+                                <div class="col-md-6 col-lg-3 col-sm-12 mb-3">
+                                    <div class="card shadow rounded-lg">
+                                        {% if file.file.name|lower|slice:"-4:" == '.pdf' %}
+                                            <img class="card-img-top" src="{% static 'images/pdf.avif' %}" style="height: 200px;" alt="{{file.title|title}}">
+                                        {% else %}
+                                            <img src="{{file.file.url}}" class="card-img-top" alt="{{file.title|title}}" style="height: 200px;">
+                                        {% endif %}
+                                        <div class="card-body">
+                                            <span class="post-category">{{file.title|title}}</span>
+                                            <h6 class="card-title text-start text-dark mt-2"><a class="text-dark">{{file.description|truncatewords:10}}</a></h6>
+                                        </div>
+                                        <div class="card-footer bg-white">
+                                            <div class="row justify-content-between">
+                                                <a href="{% url 'download_file' file.id %}" class="btn btn-primary btn-sm"><i class="fa fa-download" aria-hidden="true"></i> </a>
+                                                <a href="#" data-toggle="modal" data-target="#sendFileModal{{file.id}}" class="btn btn-success btn-sm"><i class="fa fa-share-alt-square" aria-hidden="true"></i> </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                    <!-- Send File Modal-->
+                                <div class="modal fade" id="sendFileModal{{file.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Ready to Share File?</h5>
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="POST" action="{% url 'send_file' file.id %}">
+                                                    {% csrf_token %}
+                                                    <div class="form-group">
+                                                        <label class="form-label">Email</label>
+                                                        <input type="email" name="email" class="form-control" placeholder="Enter your email" required />
+                                                    </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-primary"><i class="fa fa-share-alt-square" aria-hidden="true"></i> Share</button>
+                                            </div>
+                                            
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <h3 class="text-danger text-center fw-bold mt-5">No Item found!</h3>
+                            {% endfor %}
+        
+        
+                        <div class="col-12 py-3 pt-4">
+                            <ul class="pagination justify-content-center">
+                                {% if page_obj %}
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item">
+                                            <a href="{% url 'home' %}?page={{page_obj.previous_page_number}}" class="page-link bg-primary text-white">Prev</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item">
+                                            <span class="page-link disabled">Prev</span>
+                                        </li>
+                                    {% endif %}
+                                    {% for i in page_obj.paginator.page_range %}
+                                        {% if page_obj.number == 1 %}
+                                            <li class="page-item active">
+                                                <a href="" class="page-link">{{i}}</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item active">
+                                                <a href="{% url 'home' %}?page={{ i }}" class="page-link">{{i}}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item">
+                                            <a href="{% url 'home' %}?page={{page_obj.next_page_number}}" class="page-link bg-primary text-white">Next</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item">
+                                            <span class="page-link disabled">Next</span>
+                                        </li>
+                                    {% endif %}
+                                {% else %}
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

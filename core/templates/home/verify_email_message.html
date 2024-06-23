@@ -1,0 +1,20 @@
+<div style="background-color: #c2c2c2; padding: 15px;">
+    <h2 style="margin: 0; padding: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; background-color: #5865F2; color: #fff;">Verify Email</h2>
+    <div style="margin: 0; padding: 15px; background-color: #fff;">
+        <h2>Hi {{user.username}},</h2>
+        <p>
+            You created an account on Lizzy.Folio.com, you need to verify your email. 
+            Please click on the button below to verify your email.
+        </p></br></br>
+        <a href="{{request.scheme}}://{{domain}}{% url 'verify-email-confirm' uidb64=uid token=token %}" style="border: 0; color: #fff; background-color: #5865F2; padding: 15px; font-weight: bold; text-decoration: none; border-radius: 5px; margin-top: 60px;">
+            Verify Email
+        </a>
+        <p style="margin-top: 40px;">Or you can copy the link below to your browser</p>
+        <p>{{request.scheme}}://{{domain}}{% url 'verify-email-confirm' uidb64=uid token=token %}</p>
+        <p>The Lizzy Team</p>
+    </div>
+    <div style="text-align: center; margin-top: 20px 0;">
+        <p>&copy; {% now 'Y' %} <a href="">Blog</a></p>
+        <p>Follow us on <a href="">Twitter</a></p>
+    </div>
+</div>
