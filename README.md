@@ -76,11 +76,13 @@ This platform allows businesses to distribute documents such as wedding cards, a
 2. Search Files:
    - Use the search bar on the feed page to search for files by title or description.
 ```
+![Screenshot (7)](https://github.com/Zamani2025/Django-Fileserver-Project/assets/73368821/b62b7dfc-a971-4ab8-943a-c1a4bced25cd)
 ```markdown
 ### Email File Sharing
 1. Send File via Email:
    - On the file details page, enter the recipient's email address and click send.
    - The recipient will receive an email with a link to download the file.
+```
 ```markdown
 ### Admin Features
 1. Upload Files:
