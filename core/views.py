@@ -17,6 +17,7 @@ from django.http import HttpResponse
 from django.conf import settings
 import os
 
+# Email Verification Method
 def verifyEmailConfirm(request, uidb64, token):
     User = get_user_model()
 
@@ -37,6 +38,7 @@ def verifyEmailConfirm(request, uidb64, token):
     
     return redirect('login')
 
+# Home Page Method
 @login_required(login_url="login")
 def indexPage(request):
     files = FileModel.objects.all()
@@ -52,6 +54,7 @@ def indexPage(request):
     context = {"title": title, "page_obj": page_obj}
     return render(request=request, template_name='home/index.html', context=context) 
 
+# Search File Page Method
 def searchFilePage(request):
     q = request.POST.get('q')
     title = "Lizzy File Server - Search File"
@@ -68,22 +71,26 @@ def searchFilePage(request):
     context = {"page_obj": page_obj, "title": title}
     return render(request=request, template_name="home/search_page.html", context=context)
 
+# Login Page Method
 def loginPage(request):
     if request.user.is_authenticated:
         return redirect('home')
     if request.method == "POST":
         email = request.POST['email']
         password = request.POST['password']
+        if not get_user_model().objects.filter(email=email).exists():
+            messages.warning(request=request, message="Invalid email provided")
         user = authenticate(request=request, email=email, password=password)
         if user is not None:
             login(request=request, user=user)
             return redirect('home')
         else:
-            messages.warning(request=request, message="Invalid credentials")
+            messages.warning(request=request, message="Incorrect Password")
     title = "Lizzy File Server - Login"
     context = {"title": title}
     return render(request=request, template_name='home/login.html', context=context)
 
+# Registration Page Method
 def registerPage(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -133,11 +140,13 @@ def registerPage(request):
     context = {"title": title}
     return render(request=request, template_name='home/register.html', context=context)
 
+# Logout Page Method
 def logoutPage(request):
     logout(request=request)
     messages.success(request=request, message="Thanks for spending some quality time with the web site today.")
     return redirect('login')
 
+# Change Password Page Method
 @login_required(login_url='login')
 def changePasswordPage(request):
     
@@ -154,12 +163,13 @@ def changePasswordPage(request):
     context = {'title': title, "form": form}
     return render(request=request, template_name="home/change_password.html", context=context)
 
+# Password Reset Page Method
 def passwordReset(request):
     if request.method == "POST":
         form = ResetPasswordForm(request.POST)
         if form.is_valid():
             user_email = form.cleaned_data.get("email")
-            associated_user = get_user_model().objects.filter(Q(email=user_email)).first()
+            associated_user = get_user_model().objects.filter(email=user_email).first()
             if associated_user:
                 subject = "Password Reset Request"
                 message = render_to_string(
@@ -195,6 +205,7 @@ def passwordReset(request):
     context = {"form": form, "title": title}
     return render(request=request, template_name="home/password_reset.html", context=context)
 
+# Password Reset Confirmation Method
 def passwordResetConfirm(request, uidb64, token):
     User = get_user_model()
 
@@ -219,8 +230,9 @@ def passwordResetConfirm(request, uidb64, token):
     context = {"form": form}
     return render(request=request, template_name="home/reset_password_confirm.html", context=context)
 
+# Download File Method
 @login_required(login_url="login")
-def downloadFilePage(request, file_id):
+def downloadFile(request, file_id):
     file_obj = FileModel.objects.get(pk=file_id)
     file_path = os.path.join(settings.MEDIA_ROOT, str(file_obj.file))
     with open(file_path, 'rb') as f:
@@ -228,9 +240,10 @@ def downloadFilePage(request, file_id):
         response['Content-Disposition'] = f'attachment; filename="{file_obj.file.name}"'
         file_obj.download()
         return response
-    
+
+# Send File To Email Method  
 @login_required(login_url="login")    
-def sendFileToEmailPage(request, file_id):
+def sendFileToEmail(request, file_id):
     if request.method == "POST":
 
         file_obj = FileModel.objects.get(pk=file_id)

@@ -1,7 +1,7 @@
 from six import text_type
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 
-
+# Token Generator Class
 class AccountActivationTokenGenerator(PasswordResetTokenGenerator):
     def _make_hash_value(self, user, timestamp):
         return (

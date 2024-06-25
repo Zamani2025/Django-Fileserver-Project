@@ -11,6 +11,6 @@ urlpatterns = [
     path('password-reset/', view=views.passwordReset, name="password-reset"),
     path('password-reset-confirm/<uidb64>/<token>/', view=views.passwordResetConfirm, name="password-reset-confirm"),
     path('verify-email-confirm/<uidb64>/<token>/', view=views.verifyEmailConfirm, name="verify-email-confirm"),
-    path('download/<int:file_id>/', views.downloadFilePage, name='download_file'),
-    path('send-file-to-email/<int:file_id>/', views.sendFileToEmailPage, name='send_file'),
+    path('download/<int:file_id>/', views.downloadFile, name='download_file'),
+    path('send-file-to-email/<int:file_id>/', views.sendFileToEmail, name='send_file'),
 ]

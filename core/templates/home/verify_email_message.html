@@ -3,7 +3,7 @@
     <div style="margin: 0; padding: 15px; background-color: #fff;">
         <h2>Hi {{user.username}},</h2>
         <p>
-            You created an account on Lizzy.Folio.com, you need to verify your email. 
+            You created an account on saani.pythonanywhere.com, you need to verify your email. 
             Please click on the button below to verify your email.
         </p></br></br>
         <a href="{{request.scheme}}://{{domain}}{% url 'verify-email-confirm' uidb64=uid token=token %}" style="border: 0; color: #fff; background-color: #5865F2; padding: 15px; font-weight: bold; text-decoration: none; border-radius: 5px; margin-top: 60px;">

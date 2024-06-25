@@ -6,9 +6,8 @@ from django.contrib import messages
 from django.utils.text import slugify
 from django.contrib.auth import logout
 from django.db.models.query_utils import Q
-from django.core.paginator import PageNotAnInteger, EmptyPage, Paginator
 
-
+# Admin Change Password Page
 @login_required(login_url='login')
 def adminchangePasswordPage(request):
     if request.user.is_staff == False:
@@ -26,6 +25,7 @@ def adminchangePasswordPage(request):
     context = {'title': title, "form": form}
     return render(request=request, template_name="admin/admin_change_password.html", context=context)
 
+# Admin Dashboard Page
 @login_required(login_url='login')
 def dashboardPage(request):
     if request.user.is_staff == False:
@@ -35,6 +35,7 @@ def dashboardPage(request):
     context = {"title": title, "files": files}
     return render(request=request, template_name="admin/dashboard.html", context=context)
 
+# Admin All Files Page
 @login_required(login_url='login')
 def filePage(request):
     if request.user.is_staff == False:
@@ -45,6 +46,7 @@ def filePage(request):
     context = {"title": title, "form": form, "files": files}
     return render(request=request, template_name='admin/files.html', context=context)
 
+# Admin Add File Method
 @login_required(login_url='login')
 def addFilePage(request):
     if request.user.is_staff == False:
@@ -61,6 +63,7 @@ def addFilePage(request):
             messages.warning(request=request, message=form.errors)
             return redirect('all-files')
 
+# Admin Edit File Method
 @login_required(login_url='login')
 def editFilePage(request, pk):
     if request.method == 'POST':
@@ -77,6 +80,7 @@ def editFilePage(request, pk):
         messages.success(request=request, message=f"File updated successfully")
         return redirect('all-files')
 
+# Admin Delete File Method
 @login_required(login_url='login')
 def deleteFile(request, pk):
     if request.user.is_staff == False:
@@ -86,7 +90,7 @@ def deleteFile(request, pk):
     messages.success(request=request, message= file.title + " deleted successfully!")
     return redirect('all-files')
 
-
+# Admin Search File Method
 def searchFilePage(request):
     q = request.POST.get('q')
     title = "Searc File"

@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, SetP
 from django.contrib.auth import get_user_model
 
 
+#  Registration Form
 class RegisterUserForm(UserCreationForm):
     email = forms.CharField(label="Email", widget=forms.EmailInput(attrs={"class": "form-control", "placeholder":"Enter email"}))
     username = forms.CharField(label="Username", widget=forms.TextInput(attrs={"class": "form-control", "placeholder":"Enter username"}))
@@ -12,7 +13,7 @@ class RegisterUserForm(UserCreationForm):
         model = get_user_model()
         fields = ['username', 'email', 'password1', 'password2']
 
-
+#  Login Form
 class LoginUserForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(LoginUserForm, self).__init__(*args, **kwargs)
@@ -34,6 +35,7 @@ class LoginUserForm(AuthenticationForm):
             raise forms.ValidationError('Incorrect Email address')
         return super(LoginUserForm, self).clean(*args, **kwags)
 
+# Change Password Form
 class ChangePasswordForm(SetPasswordForm):
     new_password1 = forms.CharField(label="New Password", widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder":"Enter new password"}))
     new_password2 = forms.CharField(label="Confirm New Password", widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder":"Confirm new password"}))
@@ -49,6 +51,7 @@ class ChangePasswordForm(SetPasswordForm):
             raise forms.ValidationError("Your passsword should have more than 5 characters")
         return super(ChangePasswordForm, self).clean(*args, **kwags)
 
+# Reset Password Form
 class ResetPasswordForm(PasswordResetForm):
     email =forms.CharField(label="Email",widget=forms.EmailInput(attrs={"class": "form-control", "placeholder": "Enter email"}))
 

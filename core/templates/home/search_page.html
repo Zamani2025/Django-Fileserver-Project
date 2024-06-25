@@ -9,8 +9,10 @@
                   <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Table View</button>
                   <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Grid View</button>
                 </div>
-              </nav>
-              <div class="tab-content" id="nav-tabContent">
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+
+                {% comment %} Table View Tab Pane {% endcomment %}
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                     <div class="card shadow mb-4 mt-4">
                         <div class="card-body">
@@ -21,7 +23,7 @@
                                             <th>#</th>
                                             <th>Title</th>
                                             <th>Type</th>
-                                            <th>Desc</th>
+                                            <th>Description</th>
                                             <th>Download</th>
                                             <th>Share</th>
                                         </tr>
@@ -37,7 +39,7 @@
                                                 <td><a href="#" data-toggle="modal" data-target="#sendFileModal{{file.id}}" class="btn btn-info btn-sm"><i class="fa fa-share-alt-square"></i></a></td>
                                             </tr>
                                 
-                                            <!-- Send File Modal-->
+                                            {% comment %} Send File Modal {% endcomment %}
                                             <div class="modal fade" id="sendFileModal{{file.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -77,6 +79,8 @@
                         </div>
                     </div>
                 </div>
+
+                {% comment %} Grid View Tab Pane {% endcomment %}
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
                     <div class="row mt-4">
                             {% for file in page_obj.object_list %}
@@ -100,7 +104,7 @@
                                     </div>
                                 </div>
                                 
-                                    <!-- Send File Modal-->
+                                    {% comment %} Send File Modal {% endcomment %}
                                 <div class="modal fade" id="sendFileModal{{file.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -131,7 +135,7 @@
                                 <h3 class="text-danger text-center fw-bold mt-5">No Item found!</h3>
                             {% endfor %}
         
-        
+                                {% comment %} Pagination {% endcomment %}
                         <div class="col-12 py-3 pt-4">
                             <ul class="pagination justify-content-center">
                                 {% if page_obj %}
@@ -170,6 +174,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

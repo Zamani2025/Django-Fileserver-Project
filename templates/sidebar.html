@@ -1,8 +1,8 @@
 {% load static %}
-<!-- Sidebar -->
+{% comment %}  Sidebar  {% endcomment %}
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-    <!-- Sidebar - Brand -->
+    {% comment %}  Sidebar - Brand  {% endcomment %}
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'home' %}">
         <div class="sidebar-brand-text mx-3">
             <img src="{% static 'images/front.png' %}" style="height:50px;" />
@@ -10,12 +10,12 @@
         </div>
     </a>
 
-    <!-- Nav Item - Dashboard -->
+    {% comment %}  Nav Item - Dashboard  {% endcomment %}
     <li class="nav-item active mb-5">
         <a class="nav-link" href="{% url 'admin-dashboard' %}"></a>
     </li>
 
-    <!-- Divider -->
+    {% comment %}  Divider  {% endcomment %}
     <hr class="sidebar-divider">
 
     <li class="nav-item">
@@ -23,13 +23,13 @@
             <h2 class="fas fa-fw fa-folder-open"></h2>
         </a>
     </li>
-    <!-- Divider -->
+    {% comment %}  Divider  {% endcomment %}
     <hr class="sidebar-divider">
 
-    <!-- Sidebar Toggler (Sidebar) -->
+    {% comment %}  Sidebar Toggler (Sidebar)  {% endcomment %}
     <div class="text-center d-none d-md-inline mt-5">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
 
 </ul>
-<!-- End of Sidebar -->
+{% comment %}  End of Sidebar  {% endcomment %}

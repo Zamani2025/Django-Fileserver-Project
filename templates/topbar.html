@@ -1,12 +1,12 @@
-<!-- Topbar -->
+{% comment %} Topbar {% endcomment %}
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-    <!-- Sidebar Toggle (Topbar) -->
+    {% comment %} Sidebar Toggle (Topbar) {% endcomment %}
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
         <i class="fa fa-bars"></i>
     </button>
 
-    <!-- Topbar Search -->
+    {% comment %} Topbar Search {% endcomment %}
      {% if request.user.is_superuser %}
         <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="{% url "admin-search" %}" method="post">
             {% csrf_token %}
@@ -35,20 +35,20 @@
         </form>
      {% endif %}
 
-    <!-- Topbar Navbar -->
+    {% comment %} Topbar Navbar {% endcomment %}
     <ul class="navbar-nav ml-auto">
 
         <div class="topbar-divider d-none d-sm-block"></div>
 
         {% if request.user.is_authenticated %}
             {% if request.user.is_superuser %}
-                <!-- Nav Item - User Information -->
+                {% comment %} Nav Item - User Information {% endcomment %}
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{request.user.email}}</span>
                     </a>
-                    <!-- Dropdown - User Information -->
+                    {% comment %} Dropdown - User Information {% endcomment %}
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                         aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="{% url "admin-dashboard" %}">
@@ -79,7 +79,7 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{request.user.email}}</span>
                     </a>
-                    <!-- Dropdown - User Information -->
+                    {% comment %} Dropdown - User Information {% endcomment %}
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                         aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="{% url 'change-password' %}">
@@ -99,4 +99,4 @@
     </ul>
 
 </nav>
-<!-- End of Topbar -->
+{% comment %} End of Topbar {% endcomment %}

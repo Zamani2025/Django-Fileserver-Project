@@ -9,8 +9,10 @@
                   <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Table View</button>
                   <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Grid View</button>
                 </div>
-              </nav>
-              <div class="tab-content" id="nav-tabContent">
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+
+                {% comment %} Table View tab-pane {% endcomment %}
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                     <div class="card shadow mb-4 mt-4">
                         <div class="card-body">
@@ -113,6 +115,8 @@
                         </ul>
                     </div>
                 </div>
+                
+                {% comment %} Grid View tab-pane {% endcomment %}
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
                     <div class="row mt-4">
                             {% for file in page_obj.object_list %}

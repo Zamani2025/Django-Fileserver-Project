@@ -3,7 +3,7 @@ from core.models import CustomUser
 from django.core.validators import FileExtensionValidator
 from django.utils.text import slugify
 
-
+# File Model
 class FileModel(models.Model):
     title = models.CharField(max_length=255, blank=False, null=False)
     slug = models.SlugField()
@@ -28,10 +28,12 @@ class FileModel(models.Model):
 
         return super().save(*args, **kwargs)
     
+    # Download File Counter Method
     def download(self):
         self.download_count += 1
         self.save()
 
+    # Send Email Counter Method
     def sendEmail(self):
         self.email_count += 1
         self.save()

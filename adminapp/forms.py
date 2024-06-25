@@ -3,7 +3,7 @@ from . models import *
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import SetPasswordForm
 
-
+# Change Password Form
 class ChangePasswordForm(SetPasswordForm):
     new_password1 = forms.CharField(label="New Password", widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder":"Enter new password"}))
     new_password2 = forms.CharField(label="Confirm New Password", widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder":"Confirm new password"}))
@@ -19,6 +19,7 @@ class ChangePasswordForm(SetPasswordForm):
             raise forms.ValidationError("Your passsword should have more than 5 characters")
         return super(ChangePasswordForm, self).clean(*args, **kwags)
 
+# File Form
 class FileForm(forms.ModelForm):
     title = forms.CharField(label="Title", widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter file title"}))
     description = forms.CharField(widget=forms.Textarea(attrs={"class": "form-control", "placeholder": "Enter description"}))
