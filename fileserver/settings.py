@@ -123,17 +123,6 @@ STATICFILES_DIRS = [
 MEDIA_URL = 'images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
-# Email Configurations
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_FROM = 'londondon095@gmail.com'
-EMAIL_HOST_USER = 'londondon095@gmail.com'
-EMAIL_HOST_PASSWORD= 'almemcikbjjbeetz'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-PASSWORD_RESET_TIMEOUT =  12200
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
