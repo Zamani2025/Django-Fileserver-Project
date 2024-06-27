@@ -264,7 +264,7 @@ def sendFileToEmail(request, file_id):
         email = EmailMessage(subject, message, to=[recipient_email])
         email.attach_file(file_obj.file.path)
 
-        if email.send():
+        if email.send(fail_silently=False):
             file_obj.sendEmail()
             messages.success(request=request, message=f"File has been send to {recipient_email} now!")
             return redirect('home')
