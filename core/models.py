@@ -1,11 +1,11 @@
 from django.db import models
-from django.core.validators import FileExtensionValidator, EmailValidator
+from django.core.validators import EmailValidator
 from django.contrib.auth.models import AbstractUser
 
 
 # Custom User Model
 class CustomUser(AbstractUser):
-    email = models.CharField(max_length=40, unique=True, blank=False, null=False, validators=[EmailValidator(message="Email field is required")])
+    email = models.CharField(max_length=40, unique=True, validators=[EmailValidator(message="Email field is required")])
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 

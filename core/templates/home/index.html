@@ -23,7 +23,7 @@
                                             <th>#</th>
                                             <th>Title</th>
                                             <th>Type</th>
-                                            <th>Desc</th>
+                                            <th>Description</th>
                                             <th>Download</th>
                                             <th>Share</th>
                                         </tr>
@@ -128,8 +128,8 @@
                                             <img src="{{file.file.url}}" class="card-img-top" alt="{{file.title|title}}" style="height: 200px;">
                                         {% endif %}
                                         <div class="card-body">
-                                            <span class="post-category">{{file.title|title}}</span>
-                                            <h6 class="card-title text-start text-dark mt-2"><a class="text-dark">{{file.description|truncatewords:10}}</a></h6>
+                                            <span class="post-category">{{file.title|title|truncatewords:2}}</span>
+                                            <h6 class="card-title text-start text-dark mt-2"><a class="text-dark">{{file.description|truncatewords:7}}</a></h6>
                                         </div>
                                         <div class="card-footer bg-white">
                                             <div class="row justify-content-between">

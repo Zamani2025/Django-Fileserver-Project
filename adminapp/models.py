@@ -9,7 +9,7 @@ class FileModel(models.Model):
     slug = models.SlugField()
     description = models.TextField()
     upload_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='admin')
-    file = models.FileField(upload_to='files_img/', null=True, blank=True, validators=[FileExtensionValidator(allowed_extensions=['png', 'pdf', 'jpg', 'jpeg', 'docx'])])
+    file = models.FileField(upload_to='files/', null=True, blank=True, validators=[FileExtensionValidator(allowed_extensions=['png', 'pdf', 'jpg', 'jpeg', 'docx'])])
     download_count = models.PositiveIntegerField(default=0)
     email_count = models.PositiveIntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
-from . forms import RegisterUserForm, ChangePasswordForm, ResetPasswordForm
+from . forms import ChangePasswordForm, ResetPasswordForm
 from django.contrib.auth.decorators import login_required
 from django.db.models.query_utils import Q
 from django.template.loader import render_to_string
@@ -80,6 +80,7 @@ def loginPage(request):
         password = request.POST['password']
         if not get_user_model().objects.filter(email=email).exists():
             messages.warning(request=request, message="Invalid email provided")
+        
         user = authenticate(request=request, email=email, password=password)
         if user is not None:
             login(request=request, user=user)
@@ -95,20 +96,28 @@ def registerPage(request):
     if request.user.is_authenticated:
         return redirect('home')
     if request.method == "POST":
-        form = RegisterUserForm(request.POST)
+        username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password1')
         password2 = request.POST.get('password2')
         if password != password2:
             messages.warning(request=request, message="Password does not match")
-            context = {"title": "Register Page"}
-            return render(request=request, template_name='home/register.html', context=context)
+            return redirect('register')
+        
+        if len(password) <= 7:
+            messages.warning(request=request, message="Password must be >= 8")
+            return redirect('register')
             
         if get_user_model().objects.filter(email=email).exists():
             messages.warning(request=request, message="User with this email already exists")
             return redirect('register')
+        
+        if get_user_model().objects.filter(username=username).exists():
+            messages.warning(request=request, message="User with this username already exists")
+            return redirect('register')
+
         user = get_user_model().objects.create(
-            username="",
+            username= username,
             email=email,
             password=password
         )
@@ -250,14 +259,14 @@ def sendFileToEmail(request, file_id):
 
         recipient_email = request.POST.get('email')
 
-        subject = "File from Lizzy File Server Project"
-        message = 'Please find the attached file.'
+        subject = file_obj.title
+        message = file_obj.description
         email = EmailMessage(subject, message, to=[recipient_email])
         email.attach_file(file_obj.file.path)
 
         if email.send():
             file_obj.sendEmail()
-            messages.success(request=request, message="File has been send to your email now!")
+            messages.success(request=request, message=f"File has been send to {recipient_email} now!")
             return redirect('home')
         else:
             messages.warning(request=request, message="Incorrect email address provided")
