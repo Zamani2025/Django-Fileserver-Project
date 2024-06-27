@@ -134,14 +134,14 @@
                                         <div class="card-footer bg-white">
                                             <div class="row justify-content-between">
                                                 <a href="{% url 'download_file' file.id %}" class="btn btn-primary btn-sm"><i class="fa fa-download" aria-hidden="true"></i> </a>
-                                                <a href="#" data-toggle="modal" data-target="#sendFileModal{{file.id}}" class="btn btn-success btn-sm"><i class="fa fa-share-alt-square" aria-hidden="true"></i> </a>
+                                                <a href="#" data-toggle="modal" data-target="#sendFile1Modal{{file.id}}" class="btn btn-success btn-sm"><i class="fa fa-share-alt-square" aria-hidden="true"></i> </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 
                                     <!-- Send File Modal-->
-                                <div class="modal fade" id="sendFileModal{{file.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="sendFile1Modal{{file.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">

@@ -135,6 +135,7 @@ EMAIL_USE_SSL = True
 PASSWORD_RESET_TIMEOUT =  12200
 
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
