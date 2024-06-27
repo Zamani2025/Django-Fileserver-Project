@@ -78,15 +78,18 @@ def loginPage(request):
     if request.method == "POST":
         email = request.POST['email']
         password = request.POST['password']
+
         if not get_user_model().objects.filter(email=email).exists():
             messages.warning(request=request, message="Invalid email provided")
-        
+            return redirect('login')
+    
         user = authenticate(request=request, email=email, password=password)
         if user is not None:
             login(request=request, user=user)
             return redirect('home')
         else:
             messages.warning(request=request, message="Incorrect Password")
+            return redirect('login')
     title = "Lizzy File Server - Login"
     context = {"title": title}
     return render(request=request, template_name='home/login.html', context=context)
@@ -142,8 +145,10 @@ def registerPage(request):
         email.content_subtype = 'html'
         if email.send():
             messages.success(request=request, message="Please confirm your email address to complete the registration")
+            return redirect('login')
         else:
             messages.success(request=request, message=f'Problem sending email to {to_email}, check if you typed it correctly!')
+            return redirect('login')
         return redirect('login')
     title = "Lizzy File Server - Register"
     context = {"title": title}
