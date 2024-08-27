@@ -130,11 +130,11 @@ MEDIA_URL = 'images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 # Email Configurations
-EMAIL_BACKEND = env("EMAIL_BACKEND")
-EMAIL_HOST = env("EMAIL_HOST")
-EMAIL_FROM = env("EMAIL_FROM")
-EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD= env("EMAIL_HOST_PASSWORD")
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_FROM = 'londondon095@gmail.com'
+EMAIL_HOST_USER = 'londondon095@gmail.com'
+EMAIL_HOST_PASSWORD= 'almemcikbjjbeetz'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 
